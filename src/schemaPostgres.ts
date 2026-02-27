@@ -268,7 +268,7 @@ export class PostgresDatabase {
                 c.table_name,
                 c.column_name,
                 pgd.description
-            FROM pg_catalog.pg_statio_all_tables AS st
+            FROM pg_catalog.pg_stat_all_tables AS st
             INNER JOIN pg_catalog.pg_description pgd ON (pgd.objoid=st.relid)
             INNER JOIN information_schema.columns c ON (
                 pgd.objsubid=c.ordinal_position AND
@@ -300,7 +300,7 @@ export class PostgresDatabase {
             SELECT
                 t.table_name,
                 pgd.description
-            FROM pg_catalog.pg_statio_all_tables AS st
+            FROM pg_catalog.pg_stat_all_tables AS st
             INNER JOIN pg_catalog.pg_description pgd ON (pgd.objoid=st.relid)
             INNER JOIN information_schema.tables t ON (
                 t.table_schema=st.schemaname AND

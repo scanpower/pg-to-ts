@@ -29,10 +29,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/danvk/pg-to-ts.git"
+    "url": "https://github.com/scanpower/pg-to-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/danvk/pg-to-ts/issues"
+    "url": "https://github.com/scanpower/pg-to-ts/issues"
   },
   "author": "Dan Vanderkam <danvdk@gmail.com>",
   "contributors": [
@@ -40,7 +40,8 @@
     "Arnaud Benhamdine <arnaud.benhamdine@gmail.com>",
     "zigomir <zigomir@gmail.com>",
     "Mark Crisp <macr1324@gmail.com>",
-    "George MacKerron <george@psyt.co.uk>"
+    "George MacKerron <george@psyt.co.uk>",
+    "Zak McCreery <zak@scanpower.com>"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -59,7 +60,7 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "pg-promise": "^10.11.1",
-    "typescript-formatter": "^7.0.1",
+    "typescript-formatter": "^7.2.2",
     "yargs": "^17.3.1"
   },
   "peerDependencies": {

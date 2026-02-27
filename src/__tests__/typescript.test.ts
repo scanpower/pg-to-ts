@@ -22,8 +22,6 @@ describe('TypeScript', () => {
               // Table tableName
                export interface TableName {
                 }
-               export interface TableNameInput {
-                }
               const tableName = {
                 tableName: 'tableName',
                 columns: [],
@@ -31,14 +29,12 @@ describe('TypeScript', () => {
                 primaryKey: null,
                 foreignKeys: {},
                 $type: null as unknown as TableName,
-                $input: null as unknown as TableNameInput
               } as const;
           "
       `);
       expect(types).toEqual(new Set());
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "TableNameInput",
           "type": "TableName",
           "var": "tableName",
         }
@@ -62,8 +58,6 @@ describe('TypeScript', () => {
               // Table testschemaname.table_name
                export interface TestschemanameTableName {
                 }
-               export interface TestschemanameTableNameInput {
-                }
               const testschemaname_table_name = {
                 tableName: 'testschemaname.table_name',
                 columns: [],
@@ -71,14 +65,12 @@ describe('TypeScript', () => {
                 primaryKey: null,
                 foreignKeys: {},
                 $type: null as unknown as TestschemanameTableName,
-                $input: null as unknown as TestschemanameTableNameInput
               } as const;
           "
       `);
       expect(types).toEqual(new Set());
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "TestschemanameTableNameInput",
           "type": "TestschemanameTableName",
           "var": "testschemaname_table_name",
         }
@@ -100,8 +92,6 @@ describe('TypeScript', () => {
               // Table package
                export interface Package {
                 }
-               export interface PackageInput {
-                }
               const package_ = {
                 tableName: 'package',
                 columns: [],
@@ -109,14 +99,12 @@ describe('TypeScript', () => {
                 primaryKey: null,
                 foreignKeys: {},
                 $type: null as unknown as Package,
-                $input: null as unknown as PackageInput
               } as const;
           "
       `);
       expect(types).toEqual(new Set());
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "PackageInput",
           "type": "Package",
           "var": "package_",
         }
@@ -153,10 +141,6 @@ describe('TypeScript', () => {
                 col1: string;
         col2: boolean;
         }
-               export interface TableNameInput {
-                col1: string;
-        col2: boolean;
-        }
               const tableName = {
                 tableName: 'tableName',
                 columns: ['col1', 'col2'],
@@ -164,13 +148,12 @@ describe('TypeScript', () => {
                 primaryKey: null,
                 foreignKeys: {},
                 $type: null as unknown as TableName,
-                $input: null as unknown as TableNameInput
+
               } as const;
           "
       `);
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "TableNameInput",
           "type": "TableName",
           "var": "tableName",
         }
@@ -217,25 +200,18 @@ describe('TypeScript', () => {
         number: number;
         package: boolean;
         }
-               export interface TableNameInput {
-                string: string;
-        number: number;
-        package: boolean;
-        }
-              const tableName = {
+               const tableName = {
                 tableName: 'tableName',
                 columns: ['string', 'number', 'package'],
                 requiredForInsert: ['string', 'number', 'package'],
                 primaryKey: null,
                 foreignKeys: {},
                 $type: null as unknown as TableName,
-                $input: null as unknown as TableNameInput
               } as const;
           "
       `);
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "TableNameInput",
           "type": "TableName",
           "var": "tableName",
         }
@@ -284,25 +260,18 @@ describe('TypeScript', () => {
         user_id: string;
         sentiment: string;
         }
-               export interface TableWithForeignKeyInput {
-                id: string;
-        user_id: string;
-        sentiment: string;
-        }
-              const table_with_foreign_key = {
+               const table_with_foreign_key = {
                 tableName: 'table_with_foreign_key',
                 columns: ['id', 'user_id', 'sentiment'],
                 requiredForInsert: ['id', 'user_id', 'sentiment'],
                 primaryKey: 'id',
                 foreignKeys: {user_id: { table: 'other_table', column: 'id', $type: null as unknown /* other_table */ },},
                 $type: null as unknown as TableWithForeignKey,
-                $input: null as unknown as TableWithForeignKeyInput
               } as const;
           "
       `);
       expect(names).toMatchInlineSnapshot(`
         Object {
-          "input": "TableWithForeignKeyInput",
           "type": "TableWithForeignKey",
           "var": "table_with_foreign_key",
         }
@@ -340,7 +309,6 @@ describe('TypeScript', () => {
       primaryKey: 'id',
       foreignKeys: {user_id: { table: 'other_table', column: 'id', $type: null as unknown /* other_table */ },},
       $type: null as unknown as TableWithForeignKey,
-      $input: null as unknown as TableWithForeignKeyInput
     } as const;
     `;
     it('should attach joined types to generated TypeScript output', () => {
@@ -349,7 +317,6 @@ describe('TypeScript', () => {
           other_table: {
             var: 'other_table',
             type: 'OtherTable',
-            input: 'OtherTableInput',
           },
         }),
       ).toMatchInlineSnapshot(`
@@ -361,7 +328,6 @@ describe('TypeScript', () => {
               primaryKey: 'id',
               foreignKeys: {user_id: { table: 'other_table', column: 'id', $type: null as unknown as OtherTable },},
               $type: null as unknown as TableWithForeignKey,
-              $input: null as unknown as TableWithForeignKeyInput
             } as const;
             "
       `);
@@ -377,7 +343,6 @@ describe('TypeScript', () => {
               primaryKey: 'id',
               foreignKeys: {user_id: { table: 'other_table', column: 'id', $type: null as unknown /* other_table */ },},
               $type: null as unknown as TableWithForeignKey,
-              $input: null as unknown as TableWithForeignKeyInput
             } as const;
             "
       `);

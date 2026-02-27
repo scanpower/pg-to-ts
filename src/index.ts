@@ -110,7 +110,6 @@ export async function typescriptOfSchema(
       names => `
     ${names.var}: {
       select: ${names.type};
-      input: ${names.input};
     };`,
     )
     .join('');
@@ -150,7 +149,7 @@ export async function typescriptOfSchema(
   const formatterOption: ITFOptions = {
     replace: false,
     verify: false,
-    tsconfig: true,
+    tsconfig: false,
     tslint: true,
     editorconfig: true,
     tsfmt: true,

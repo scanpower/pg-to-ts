@@ -59,7 +59,6 @@ function isNonNullish<T>(x: T): x is Exclude<T, null | undefined> {
 export interface TableNames {
   var: string;
   type: string;
-  input: string;
 }
 
 /**
@@ -88,7 +87,6 @@ export function generateTableInterface(
   options: Options,
 ): [code: string, names: TableNames, typesToImport: Set<string>] {
   let selectableMembers = '';
-  let insertableMembers = '';
   const columns: string[] = [];
   const requiredForInsert: string[] = [];
   const typesToImport = new Set<string>();
@@ -100,7 +98,7 @@ export function generateTableInterface(
       possiblyOrNull = columnDef.nullable ? ' | null' : '',
       insertablyOptional =
         columnDef.nullable || columnDef.hasDefault ? '?' : '',
-      jsdoc = comment ? `/** ${comment} */\n` : '';
+      jsdoc = comment ? `/** ${comment} */` : '';
 
     let {tsType} = columnDef;
     if (tsType === 'Json' && options.options.jsonTypesFile && comment) {
@@ -111,8 +109,7 @@ export function generateTableInterface(
       }
     }
 
-    selectableMembers += `${jsdoc}${columnName}: ${tsType}${possiblyOrNull};\n`;
-    insertableMembers += `${jsdoc}${columnName}${insertablyOptional}: ${tsType}${possiblyOrNull};\n`;
+    selectableMembers += `${columnName}: ${tsType}${possiblyOrNull}; ${jsdoc}\n`;
 
     columns.push(columnName);
     if (!columnDef.nullable && !columnDef.hasDefault) {
@@ -140,7 +137,6 @@ export function generateTableInterface(
   const names: TableNames = {
     var: tableVarName,
     type: camelTableName,
-    input: camelTableName + 'Input',
   };
 
   return [
@@ -148,8 +144,6 @@ export function generateTableInterface(
       // Table ${sqlTableName}
       ${jsdoc} export interface ${names.type} {
         ${selectableMembers}}
-      ${jsdoc} export interface ${names.input} {
-        ${insertableMembers}}
       const ${names.var} = {
         tableName: '${sqlTableName}',
         columns: ${quotedArray(columns)},
@@ -157,7 +151,6 @@ export function generateTableInterface(
         primaryKey: ${quoteNullable(primaryKey)},
         foreignKeys: ${quoteForeignKeyMap(foreignKeys)},
         $type: null as unknown as ${names.type},
-        $input: null as unknown as ${names.input}
       } as const;
   `,
     names,

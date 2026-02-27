@@ -94,19 +94,19 @@ const argv = yargs(hideBin(process.argv))
 
 (async () => {
   const formattedOutput = await typescriptOfSchema(
-    argv.conn,
-    argv.table,
-    argv.excludedTable,
-    argv.schema,
+    argv.conn as string,
+    argv.table as string[],
+    argv.excludedTable as string[],
+    argv.schema as string,
     {
-      camelCase: argv.camelCase,
-      writeHeader: !argv.noHeader,
-      datesAsStrings: argv.datesAsStrings,
-      jsonTypesFile: argv.jsonTypesFile,
-      prefixWithSchemaNames: argv.prefixWithSchemaNames,
+      camelCase: argv.camelCase as boolean | undefined,
+      writeHeader: !argv.noHeader as boolean | undefined,
+      datesAsStrings: argv.datesAsStrings as boolean | undefined,
+      jsonTypesFile: argv.jsonTypesFile as string | undefined,
+      prefixWithSchemaNames: argv.prefixWithSchemaNames as boolean | undefined,
     },
   );
-  fs.writeFileSync(argv.output, formattedOutput);
+  fs.writeFileSync(argv.output as string, formattedOutput);
 })()
   .then(() => {
     process.exit();
