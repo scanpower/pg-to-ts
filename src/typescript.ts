@@ -101,7 +101,7 @@ export function generateTableInterface(
       jsdoc = comment ? `/** ${comment} */` : '';
 
     let {tsType} = columnDef;
-    if (tsType === 'Json' && options.options.jsonTypesFile && comment) {
+    if (comment) {
       const m = JSDOC_TYPE_RE.exec(comment);
       if (m) {
         tsType = m[1].trim();
