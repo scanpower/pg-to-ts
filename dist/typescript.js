@@ -71,7 +71,7 @@ function generateTableInterface(tableName, tableDefinition, schemaName, options)
         var columnNameRaw = _a[_i];
         var columnName = options.transformColumnName(columnNameRaw), columnDef = tableDefinition.columns[columnNameRaw], comment_1 = columnDef.comment, possiblyOrNull = columnDef.nullable ? ' | null' : '', insertablyOptional = columnDef.nullable || columnDef.hasDefault ? '?' : '', jsdoc_1 = comment_1 ? "/** ".concat(comment_1, " */") : '';
         var tsType = columnDef.tsType;
-        if (tsType === 'Json' && options.options.jsonTypesFile && comment_1) {
+        if (comment_1) {
             var m = JSDOC_TYPE_RE.exec(comment_1);
             if (m) {
                 tsType = m[1].trim();
