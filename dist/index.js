@@ -100,7 +100,11 @@ function typescriptOfSchema(dbIn, tables, excludedTables, inSchema, options) {
                     if (!(tables.length === 0)) return [3 /*break*/, 2];
                     return [4 /*yield*/, db.getSchemaTables(schema)];
                 case 1:
-                    tables = (_c.sent()).filter(function (t) { return excludedTables.indexOf(t) == -1; });
+                    tables = (_c.sent()).filter(function (t) {
+                        return !excludedTables.some(function (x) {
+                            return x.endsWith('*') ? t.startsWith(x.slice(0, -1)) : x === t;
+                        });
+                    });
                     _c.label = 2;
                 case 2:
                     optionsObject = new options_1.default(options);
