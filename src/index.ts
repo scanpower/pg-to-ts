@@ -72,7 +72,10 @@ export async function typescriptOfSchema(
 
   if (tables.length === 0) {
     tables = (await db.getSchemaTables(schema)).filter(
-      t => excludedTables.indexOf(t) == -1,
+      t =>
+        !excludedTables.some(x =>
+          x.endsWith('*') ? t.startsWith(x.slice(0, -1)) : x === t,
+        ),
     );
   }
 
